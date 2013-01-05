@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+
+# A few helpful tips about the Rules file:
+#
+# * The string given to #compile and #route are matching patterns for
+#   identifiers--not for paths. Therefore, you can’t match on extension.
+#
+# * The order of rules is important: for each item, only the first matching
+#   rule is applied.
+#
+# * Item identifiers start and end with a slash (e.g. “/about/” for the file
+#   “content/about.html”). To select all children, grandchildren, … of an
+#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
+#   because “*” matches zero or more characters.
+
+compile '/assets/screen/' do
+  filter :sass, Compass.sass_engine_options
+end
+
+compile %r{^/assets/_.+$} do
+end
+
+route '/assets/screen/' do
+  '/assets/screen.css'
+end
+
+route %r{^/assets/_.+$} do
+  nil
+end
+
+compile '*' do
+  unless item.binary?
+    nolayout = false
+    # don’t filter binary items
+    case item[:extension]
+    when 'md'
+      filter :redcarpet, renderer: ::SexyHTML, options: { fenced_code_blocks: true }
+      layout 'post' if item[:kind] == 'article'
+    when 'erb'
+      filter :erb
+    else
+      nolayout = true
+    end
+    layout 'default' unless nolayout
+  end
+end
+
+route '/posts/*/' do
+  if item.attributes.fetch(:published, true)
+    slug = Pathname.new(item[:filename]).basename.sub_ext('').to_s
+    year = attribute_to_time(item[:created_at]).year.to_s
+    "/#{year}/#{slug}.html"
+  end
+end
+
+route '*' do
+  id = (item.identifier == '/') ? '/index' : item.identifier.chop
+  ext = ['md', 'erb'].include?(item[:extension]) ? 'html' : item[:extension]
+  "#{id}.#{ext}"
+end
+
+layout '*', :erb

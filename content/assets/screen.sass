@@ -1,0 +1,125 @@
+@import "compass/typography"
+@import "compass/layout/sticky-footer"
+
+@import "normalize"
+@import "html5bp"
+@import "pygments"
+
+// Variables
+
+$base-font-size: 18px
+$base-line-height: 27px
+
+$mainDarkColor: #3b3140
+$linkNormalColor: #138391
+$textColor: #111
+$secondaryTextColor: #666
+
+$defaultFontStack: Georgia, "Lucida Bright", "Bitstream Charter", "URW Bookman L", serif
+$helperFontStack: Verdana, "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", "Verdana Ref", sans-serif
+
+// This uses $base-font-size and $base-line-height
++establish-baseline
+
++sticky-footer(120px)
+
+.contentContainer
+  max-width: 720px
+  min-width: 360px
+  width: 100%
+  margin: 0 auto
+
+#footer
+  background: $mainDarkColor
+  color: #ccc
+
+  .contentContainer
+    +padding-leader(1)
+
+
+body
+  border-top: 20px solid $mainDarkColor
+  background: url(img/chruch.png) repeat
+  font-family: $defaultFontStack
+  color: $textColor
+
+header.main
+  margin: 2em 0
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+
+  li
+    display: inline
+    padding: .3em 1em
+    border-right: 1px solid #bfb8a3
+
+    &.leader
+      padding-left: 0
+
+    &:last-child
+      border-right: 0
+
+  .author
+    font-weight: bold
+
+a
+  +link-colors($linkNormalColor)
+  +hover-link
+
+h1, h2, h3
+  a
+    +link-colors($textColor)
+
+h1, h2, h3, h4
+  font-weight: bold
+
+h1
+  +adjust-font-size-to(40px)
+
+h2
+  +adjust-font-size-to(32px)
+
+h3
+  +adjust-font-size-to(26px)
+  
+h4
+  +adjust-font-size-to(20px)
+
+img
+  max-width: 100%
+  height: auto
+
+// Blogging elements
+article
+  +trailer(2)
+
+time
+  font-family: $helperFontStack
+  color: $secondaryTextColor
+  +adjust-font-size-to(16px)
+
+article > header > h1
+  margin: 0
+
+code, pre
+  +adjust-font-size-to(14px, 0.9)
+  word-wrap: normal
+  overflow-x: auto
+  overflow-y: visible
+  border: 1px solid #bbb
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", monospace
+
+pre
+  padding: 8px
+  white-space: pre
+
+code
+  padding: 2px 4px
+
+blockquote
+  margin: 1em 0
+  padding: 0 40px
+  font-style: italic
+  border-left: 4px solid #bbb

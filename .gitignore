@@ -1,0 +1,6 @@
+.bundle
+.sass-cache
+/vendor
+
+*.log
+/tmp

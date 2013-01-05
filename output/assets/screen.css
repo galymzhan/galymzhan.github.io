@@ -1,0 +1,1144 @@
+/* normalize.css v1.0.1 | MIT License | git.io/normalize */
+/* line 2, content/assets/_normalize.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+  display: block;
+}
+
+/* line 3, content/assets/_normalize.scss */
+audio, canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/* line 4, content/assets/_normalize.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/* line 5, content/assets/_normalize.scss */
+[hidden] {
+  display: none;
+}
+
+/* line 6, content/assets/_normalize.scss */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* line 7, content/assets/_normalize.scss */
+html, button, input, select, textarea {
+  font-family: sans-serif;
+}
+
+/* line 8, content/assets/_normalize.scss */
+body {
+  margin: 0;
+}
+
+/* line 9, content/assets/_normalize.scss */
+a:focus {
+  outline: thin dotted;
+}
+
+/* line 10, content/assets/_normalize.scss */
+a:active, a:hover {
+  outline: 0;
+}
+
+/* line 11, content/assets/_normalize.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* line 12, content/assets/_normalize.scss */
+h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+
+/* line 13, content/assets/_normalize.scss */
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+/* line 14, content/assets/_normalize.scss */
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+/* line 15, content/assets/_normalize.scss */
+h5 {
+  font-size: .83em;
+  margin: 1.67em 0;
+}
+
+/* line 16, content/assets/_normalize.scss */
+h6 {
+  font-size: .75em;
+  margin: 2.33em 0;
+}
+
+/* line 17, content/assets/_normalize.scss */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/* line 18, content/assets/_normalize.scss */
+b, strong {
+  font-weight: bold;
+}
+
+/* line 19, content/assets/_normalize.scss */
+blockquote {
+  margin: 1em 40px;
+}
+
+/* line 20, content/assets/_normalize.scss */
+dfn {
+  font-style: italic;
+}
+
+/* line 21, content/assets/_normalize.scss */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/* line 22, content/assets/_normalize.scss */
+p, pre {
+  margin: 1em 0;
+}
+
+/* line 23, content/assets/_normalize.scss */
+code, kbd, pre, samp {
+  font-family: monospace,serif;
+  _font-family: 'courier new',monospace;
+  font-size: 1em;
+}
+
+/* line 24, content/assets/_normalize.scss */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 25, content/assets/_normalize.scss */
+q {
+  quotes: none;
+}
+
+/* line 26, content/assets/_normalize.scss */
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* line 27, content/assets/_normalize.scss */
+small {
+  font-size: 80%;
+}
+
+/* line 28, content/assets/_normalize.scss */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 29, content/assets/_normalize.scss */
+sup {
+  top: -0.5em;
+}
+
+/* line 30, content/assets/_normalize.scss */
+sub {
+  bottom: -0.25em;
+}
+
+/* line 31, content/assets/_normalize.scss */
+dl, menu, ol, ul {
+  margin: 1em 0;
+}
+
+/* line 32, content/assets/_normalize.scss */
+dd {
+  margin: 0 0 0 40px;
+}
+
+/* line 33, content/assets/_normalize.scss */
+menu, ol, ul {
+  padding: 0 0 0 40px;
+}
+
+/* line 34, content/assets/_normalize.scss */
+nav ul, nav ol {
+  list-style: none;
+  list-style-image: none;
+}
+
+/* line 35, content/assets/_normalize.scss */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+/* line 36, content/assets/_normalize.scss */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* line 37, content/assets/_normalize.scss */
+figure {
+  margin: 0;
+}
+
+/* line 38, content/assets/_normalize.scss */
+form {
+  margin: 0;
+}
+
+/* line 39, content/assets/_normalize.scss */
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/* line 40, content/assets/_normalize.scss */
+legend {
+  border: 0;
+  padding: 0;
+  white-space: normal;
+  *margin-left: -7px;
+}
+
+/* line 41, content/assets/_normalize.scss */
+button, input, select, textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+
+/* line 42, content/assets/_normalize.scss */
+button, input {
+  line-height: normal;
+}
+
+/* line 43, content/assets/_normalize.scss */
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  *overflow: visible;
+}
+
+/* line 44, content/assets/_normalize.scss */
+button[disabled], input[disabled] {
+  cursor: default;
+}
+
+/* line 45, content/assets/_normalize.scss */
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  *height: 13px;
+  *width: 13px;
+}
+
+/* line 46, content/assets/_normalize.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 47, content/assets/_normalize.scss */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* line 48, content/assets/_normalize.scss */
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 49, content/assets/_normalize.scss */
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+/* line 50, content/assets/_normalize.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ==========================================================================
+   HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
+   ========================================================================== */
+/* line 5, content/assets/_html5bp.scss */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/* line 10, content/assets/_html5bp.scss */
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/* line 15, content/assets/_html5bp.scss */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/* line 24, content/assets/_html5bp.scss */
+img {
+  vertical-align: middle;
+}
+
+/* line 28, content/assets/_html5bp.scss */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 34, content/assets/_html5bp.scss */
+textarea {
+  resize: vertical;
+}
+
+/* line 38, content/assets/_html5bp.scss */
+.chromeframe {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+/* line 67, content/assets/_html5bp.scss */
+.ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  *text-indent: -9999px;
+}
+
+/* line 74, content/assets/_html5bp.scss */
+.ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 100%;
+}
+
+/* line 81, content/assets/_html5bp.scss */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+/* line 86, content/assets/_html5bp.scss */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* line 98, content/assets/_html5bp.scss */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/* line 107, content/assets/_html5bp.scss */
+.invisible {
+  visibility: hidden;
+}
+
+/* line 112, content/assets/_html5bp.scss */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+/* line 117, content/assets/_html5bp.scss */
+.clearfix:after {
+  clear: both;
+}
+
+/* line 121, content/assets/_html5bp.scss */
+.clearfix {
+  *zoom: 1;
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+@media print {
+  /* line 130, content/assets/_html5bp.scss */
+  * {
+    background: transparent !important;
+    color: black !important;
+    /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* line 138, content/assets/_html5bp.scss */
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  /* line 142, content/assets/_html5bp.scss */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  /* line 146, content/assets/_html5bp.scss */
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /*
+   * Don't show links for images, or javascript/internal links
+   */
+  /* line 156, content/assets/_html5bp.scss */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  /* line 161, content/assets/_html5bp.scss */
+  pre,
+  blockquote {
+    border: 1px solid #999999;
+    page-break-inside: avoid;
+  }
+
+  /* line 166, content/assets/_html5bp.scss */
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */
+  }
+
+  /* line 171, content/assets/_html5bp.scss */
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* line 175, content/assets/_html5bp.scss */
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+}
+
+  /* line 185, content/assets/_html5bp.scss */
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* line 191, content/assets/_html5bp.scss */
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+/* Pygments styles */
+/* line 2, content/assets/_pygments.scss */
+.highlight table {
+  border-spacing: 0;
+}
+
+/* line 3, content/assets/_pygments.scss */
+.highlight table td {
+  padding: 5px;
+}
+
+/* line 4, content/assets/_pygments.scss */
+.highlight table .gutter {
+  text-align: right;
+}
+
+/* line 5, content/assets/_pygments.scss */
+.highlight, .highlight .w {
+  background-color: #f8f8f8;
+}
+
+/* line 6, content/assets/_pygments.scss */
+.highlight .c {
+  color: #8f5902;
+  font-style: italic;
+}
+
+/* Comment */
+/* line 7, content/assets/_pygments.scss */
+.highlight .err {
+  color: #a40000;
+  border: 1px solid #ef2929;
+}
+
+/* Error */
+/* line 8, content/assets/_pygments.scss */
+.highlight .g {
+  color: black;
+}
+
+/* Generic */
+/* line 9, content/assets/_pygments.scss */
+.highlight .k {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Keyword */
+/* line 10, content/assets/_pygments.scss */
+.highlight .l {
+  color: black;
+}
+
+/* Literal */
+/* line 11, content/assets/_pygments.scss */
+.highlight .n {
+  color: black;
+}
+
+/* Name */
+/* line 12, content/assets/_pygments.scss */
+.highlight .o {
+  color: #ce5c00;
+  font-weight: bold;
+}
+
+/* Operator */
+/* line 13, content/assets/_pygments.scss */
+.highlight .x {
+  color: black;
+}
+
+/* Other */
+/* line 14, content/assets/_pygments.scss */
+.highlight .p {
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Punctuation */
+/* line 15, content/assets/_pygments.scss */
+.highlight .cm {
+  color: #8f5902;
+  font-style: italic;
+}
+
+/* Comment.Multiline */
+/* line 16, content/assets/_pygments.scss */
+.highlight .cp {
+  color: #8f5902;
+  font-style: italic;
+}
+
+/* Comment.Preproc */
+/* line 17, content/assets/_pygments.scss */
+.highlight .c1 {
+  color: #8f5902;
+  font-style: italic;
+}
+
+/* Comment.Single */
+/* line 18, content/assets/_pygments.scss */
+.highlight .cs {
+  color: #8f5902;
+  font-style: italic;
+}
+
+/* Comment.Special */
+/* line 19, content/assets/_pygments.scss */
+.highlight .gd {
+  color: #a40000;
+}
+
+/* Generic.Deleted */
+/* line 20, content/assets/_pygments.scss */
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+
+/* Generic.Emph */
+/* line 21, content/assets/_pygments.scss */
+.highlight .gr {
+  color: #ef2929;
+}
+
+/* Generic.Error */
+/* line 22, content/assets/_pygments.scss */
+.highlight .gh {
+  color: #000080;
+  font-weight: bold;
+}
+
+/* Generic.Heading */
+/* line 23, content/assets/_pygments.scss */
+.highlight .gi {
+  color: #00a000;
+}
+
+/* Generic.Inserted */
+/* line 24, content/assets/_pygments.scss */
+.highlight .go {
+  color: #000000;
+  font-style: italic;
+}
+
+/* Generic.Output */
+/* line 25, content/assets/_pygments.scss */
+.highlight .gp {
+  color: #8f5902;
+}
+
+/* Generic.Prompt */
+/* line 26, content/assets/_pygments.scss */
+.highlight .gs {
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Generic.Strong */
+/* line 27, content/assets/_pygments.scss */
+.highlight .gu {
+  color: #800080;
+  font-weight: bold;
+}
+
+/* Generic.Subheading */
+/* line 28, content/assets/_pygments.scss */
+.highlight .gt {
+  color: #a40000;
+  font-weight: bold;
+}
+
+/* Generic.Traceback */
+/* line 29, content/assets/_pygments.scss */
+.highlight .kc {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Keyword.Constant */
+/* line 30, content/assets/_pygments.scss */
+.highlight .kd {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Keyword.Declaration */
+/* line 31, content/assets/_pygments.scss */
+.highlight .kn {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Keyword.Namespace */
+/* line 32, content/assets/_pygments.scss */
+.highlight .kp {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Keyword.Pseudo */
+/* line 33, content/assets/_pygments.scss */
+.highlight .kr {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Keyword.Reserved */
+/* line 34, content/assets/_pygments.scss */
+.highlight .kt {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Keyword.Type */
+/* line 35, content/assets/_pygments.scss */
+.highlight .ld {
+  color: black;
+}
+
+/* Literal.Date */
+/* line 36, content/assets/_pygments.scss */
+.highlight .m {
+  color: #0000cf;
+  font-weight: bold;
+}
+
+/* Literal.Number */
+/* line 37, content/assets/_pygments.scss */
+.highlight .s {
+  color: #4e9a06;
+}
+
+/* Literal.String */
+/* line 38, content/assets/_pygments.scss */
+.highlight .na {
+  color: #c4a000;
+}
+
+/* Name.Attribute */
+/* line 39, content/assets/_pygments.scss */
+.highlight .nb {
+  color: #204a87;
+}
+
+/* Name.Builtin */
+/* line 40, content/assets/_pygments.scss */
+.highlight .nc {
+  color: black;
+}
+
+/* Name.Class */
+/* line 41, content/assets/_pygments.scss */
+.highlight .no {
+  color: black;
+}
+
+/* Name.Constant */
+/* line 42, content/assets/_pygments.scss */
+.highlight .nd {
+  color: #5c35cc;
+  font-weight: bold;
+}
+
+/* Name.Decorator */
+/* line 43, content/assets/_pygments.scss */
+.highlight .ni {
+  color: #ce5c00;
+}
+
+/* Name.Entity */
+/* line 44, content/assets/_pygments.scss */
+.highlight .ne {
+  color: #cc0000;
+  font-weight: bold;
+}
+
+/* Name.Exception */
+/* line 45, content/assets/_pygments.scss */
+.highlight .nf {
+  color: black;
+}
+
+/* Name.Function */
+/* line 46, content/assets/_pygments.scss */
+.highlight .nl {
+  color: #f57900;
+}
+
+/* Name.Label */
+/* line 47, content/assets/_pygments.scss */
+.highlight .nn {
+  color: black;
+}
+
+/* Name.Namespace */
+/* line 48, content/assets/_pygments.scss */
+.highlight .nx {
+  color: black;
+}
+
+/* Name.Other */
+/* line 49, content/assets/_pygments.scss */
+.highlight .py {
+  color: black;
+}
+
+/* Name.Property */
+/* line 50, content/assets/_pygments.scss */
+.highlight .nt {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Name.Tag */
+/* line 51, content/assets/_pygments.scss */
+.highlight .nv {
+  color: black;
+}
+
+/* Name.Variable */
+/* line 52, content/assets/_pygments.scss */
+.highlight .ow {
+  color: #204a87;
+  font-weight: bold;
+}
+
+/* Operator.Word */
+/* line 53, content/assets/_pygments.scss */
+.highlight .w {
+  color: #f8f8f8;
+  text-decoration: underline;
+}
+
+/* Text.Whitespace */
+/* line 54, content/assets/_pygments.scss */
+.highlight .mf {
+  color: #0000cf;
+  font-weight: bold;
+}
+
+/* Literal.Number.Float */
+/* line 55, content/assets/_pygments.scss */
+.highlight .mh {
+  color: #0000cf;
+  font-weight: bold;
+}
+
+/* Literal.Number.Hex */
+/* line 56, content/assets/_pygments.scss */
+.highlight .mi {
+  color: #0000cf;
+  font-weight: bold;
+}
+
+/* Literal.Number.Integer */
+/* line 57, content/assets/_pygments.scss */
+.highlight .mo {
+  color: #0000cf;
+  font-weight: bold;
+}
+
+/* Literal.Number.Oct */
+/* line 58, content/assets/_pygments.scss */
+.highlight .sb {
+  color: #4e9a06;
+}
+
+/* Literal.String.Backtick */
+/* line 59, content/assets/_pygments.scss */
+.highlight .sc {
+  color: #4e9a06;
+}
+
+/* Literal.String.Char */
+/* line 60, content/assets/_pygments.scss */
+.highlight .sd {
+  color: #8f5902;
+  font-style: italic;
+}
+
+/* Literal.String.Doc */
+/* line 61, content/assets/_pygments.scss */
+.highlight .s2 {
+  color: #4e9a06;
+}
+
+/* Literal.String.Double */
+/* line 62, content/assets/_pygments.scss */
+.highlight .se {
+  color: #4e9a06;
+}
+
+/* Literal.String.Escape */
+/* line 63, content/assets/_pygments.scss */
+.highlight .sh {
+  color: #4e9a06;
+}
+
+/* Literal.String.Heredoc */
+/* line 64, content/assets/_pygments.scss */
+.highlight .si {
+  color: #4e9a06;
+}
+
+/* Literal.String.Interpol */
+/* line 65, content/assets/_pygments.scss */
+.highlight .sx {
+  color: #4e9a06;
+}
+
+/* Literal.String.Other */
+/* line 66, content/assets/_pygments.scss */
+.highlight .sr {
+  color: #4e9a06;
+}
+
+/* Literal.String.Regex */
+/* line 67, content/assets/_pygments.scss */
+.highlight .s1 {
+  color: #4e9a06;
+}
+
+/* Literal.String.Single */
+/* line 68, content/assets/_pygments.scss */
+.highlight .ss {
+  color: #4e9a06;
+}
+
+/* Literal.String.Symbol */
+/* line 69, content/assets/_pygments.scss */
+.highlight .bp {
+  color: #3465a4;
+}
+
+/* Name.Builtin.Pseudo */
+/* line 70, content/assets/_pygments.scss */
+.highlight .vc {
+  color: black;
+}
+
+/* Name.Variable.Class */
+/* line 71, content/assets/_pygments.scss */
+.highlight .vg {
+  color: black;
+}
+
+/* Name.Variable.Global */
+/* line 72, content/assets/_pygments.scss */
+.highlight .vi {
+  color: black;
+}
+
+/* Name.Variable.Instance */
+/* line 73, content/assets/_pygments.scss */
+.highlight .il {
+  color: #0000cf;
+  font-weight: bold;
+}
+
+/* Literal.Number.Integer.Long */
+/* line 61, /home/galymzhan/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+* html {
+  font-size: 112.5%;
+}
+
+/* line 64, /home/galymzhan/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+html {
+  font-size: 18px;
+  line-height: 1.5em;
+}
+
+/* line 10, /home/galymzhan/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 12, /home/galymzhan/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+#root {
+  clear: both;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -120px;
+}
+/* line 18, /home/galymzhan/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+#root #root_footer {
+  height: 120px;
+}
+
+/* line 20, /home/galymzhan/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/layout/_sticky-footer.scss */
+#footer {
+  clear: both;
+  position: relative;
+  height: 120px;
+}
+
+/* line 26, content/assets/screen.sass */
+.contentContainer {
+  max-width: 720px;
+  min-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* line 32, content/assets/screen.sass */
+#footer {
+  background: #3b3140;
+  color: #cccccc;
+}
+/* line 36, content/assets/screen.sass */
+#footer .contentContainer {
+  padding-top: 1.5em;
+}
+
+/* line 40, content/assets/screen.sass */
+body {
+  border-top: 20px solid #3b3140;
+  background: url(img/chruch.png) repeat;
+  font-family: Georgia, "Lucida Bright", "Bitstream Charter", "URW Bookman L", serif;
+  color: #111111;
+}
+
+/* line 46, content/assets/screen.sass */
+header.main {
+  margin: 2em 0;
+}
+/* line 48, content/assets/screen.sass */
+header.main ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 53, content/assets/screen.sass */
+header.main li {
+  display: inline;
+  padding: 0.3em 1em;
+  border-right: 1px solid #bfb8a3;
+}
+/* line 58, content/assets/screen.sass */
+header.main li.leader {
+  padding-left: 0;
+}
+/* line 61, content/assets/screen.sass */
+header.main li:last-child {
+  border-right: 0;
+}
+/* line 64, content/assets/screen.sass */
+header.main .author {
+  font-weight: bold;
+}
+
+/* line 67, content/assets/screen.sass */
+a {
+  color: #138391;
+  text-decoration: none;
+}
+/* line 4, /home/galymzhan/.rvm/gems/ruby-1.9.3-p194/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/links/_hover-link.scss */
+a:hover {
+  text-decoration: underline;
+}
+
+/* line 72, content/assets/screen.sass */
+h1 a, h2 a, h3 a {
+  color: #111111;
+}
+
+/* line 75, content/assets/screen.sass */
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
+/* line 78, content/assets/screen.sass */
+h1 {
+  font-size: 2.22222em;
+  line-height: 1.35em;
+}
+
+/* line 81, content/assets/screen.sass */
+h2 {
+  font-size: 1.77778em;
+  line-height: 1.6875em;
+}
+
+/* line 84, content/assets/screen.sass */
+h3 {
+  font-size: 1.44444em;
+  line-height: 2.07692em;
+}
+
+/* line 87, content/assets/screen.sass */
+h4 {
+  font-size: 1.11111em;
+  line-height: 1.35em;
+}
+
+/* line 90, content/assets/screen.sass */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* line 95, content/assets/screen.sass */
+article {
+  margin-bottom: 3em;
+}
+
+/* line 98, content/assets/screen.sass */
+time {
+  font-family: Verdana, "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", "Verdana Ref", sans-serif;
+  color: #666666;
+  font-size: 0.88889em;
+  line-height: 1.6875em;
+}
+
+/* line 103, content/assets/screen.sass */
+article > header > h1 {
+  margin: 0;
+}
+
+/* line 106, content/assets/screen.sass */
+code, pre {
+  font-size: 0.77778em;
+  line-height: 1.73571em;
+  word-wrap: normal;
+  overflow-x: auto;
+  overflow-y: visible;
+  border: 1px solid #bbbbbb;
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", monospace;
+}
+
+/* line 114, content/assets/screen.sass */
+pre {
+  padding: 8px;
+  white-space: pre;
+}
+
+/* line 118, content/assets/screen.sass */
+code {
+  padding: 2px 4px;
+}
+
+/* line 121, content/assets/screen.sass */
+blockquote {
+  margin: 1em 0;
+  padding: 0 40px;
+  font-style: italic;
+  border-left: 4px solid #bbbbbb;
+}

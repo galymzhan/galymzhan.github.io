@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Using Symfony Console Component in Zend application - bytespree.com</title>
+    
+    <meta name="description" content="Instead of reinventing the wheel, have a look at Symfony Console Component for all of your CLI tasks.">
+    
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nanoc 3.4.3"> 
+
+    <link rel="stylesheet" href="/assets/screen.css">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script>window.html5 || document.write('<script src="/assets/js/html5shiv.js"><\/script>')</script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="root">
+      <div class="contentContainer">
+        <header class="main">
+          <ul>
+            <li class="leader">
+              <a href="/">Words by <span class="author">galymzhan</span></a>
+            </li>
+            <li><a href="/about.html">About</a></li>
+          </ul>
+        </header>
+        
+<article>
+  <header>
+    <h1>Using Symfony Console Component in Zend application</h1>
+    <time datetime="2012-02-14" pubdate>
+      February 14, 2012
+    </time>
+  </header>
+  <p>Zend Framework is good when it comes to web requests, involving controllers with their actions, but usually most web applications today have another entry point: running from console. Some examples of console tasks: clearing up cache, sending emails, seeding a database, extracting/merging translatable strings and generally any kind of batch jobs. At first, I&#39;ve kept a directory of runnable scripts for this, but after some time, I realized the need to unify and organize this messy collection of scripts.
+<a href="http://symfony.com/doc/2.0/components/console.html">Symfony Console Component</a> elegantly solves this kind of problem, providing solid platform for building CLI applications. Being one of the core components of <a href="http://symfony.com">Symfony2</a> framework, it&#39;s already intensively used in the framework itself and other PHP projects. If you are new to Symfony Console, I suggest checking out these links:</p>
+
+<ul>
+<li><a href="http://symfony.com/doc/2.0/components/console.html">The Console Component</a></li>
+<li><a href="http://dev.umpirsky.com/building-cli-apps-with-symfony-console-component/">Building CLI Apps with Symfony Console Component</a></li>
+</ul>
+
+<p>Let&#39;s see how could we integrate it into Zend application. Suppose we have a Zend application with the structure similar to the <a href="http://framework.zend.com/manual/en/project-structure.project.html">recommended one</a> and <code>~/cli-show</code> is a root directory. Symfony Console requires PHP &gt;= 5.3, version of Zend framework being used is 1.11.8.</p>
+
+<h2>Installing Symfony Console</h2>
+
+<p>I&#39;m going to install it from Git. In real project, we&#39;ll probably use git&#39;s submodule functionality or download the archive from Github and unzip it, but for the sake of simplicity, let&#39;s just clone it now.</p>
+<pre class="highlight shell"><span class="o">[</span>/]<span class="nv">$ </span><span class="nb">cd</span> ~/cli-show
+<span class="o">[</span>cli-show]<span class="nv">$ </span>mkdir -p library/Symfony/Component
+<span class="o">[</span>cli-show]<span class="nv">$ </span>git clone https://github.com/symfony/Console.git library/Symfony/Component/Console
+</pre>
+<p>Also, to properly autoload Symfony classes we&#39;ll have to register Symfony namespace (assuming <code>Zend_Loader_Autoloader</code> is used for autoloading).</p>
+<pre class="highlight text">[production]
+; Add this line
+autoloaderNamespaces.symfony = &quot;Symfony&quot;
+</pre>
+<h2>Testing installation</h2>
+
+<p>Symfony Console itself has some basic commands. Let&#39;s try running them. Create the file <code>console</code> under <code>scripts</code> directory, and make it executable.</p>
+<pre class="highlight shell"><span class="o">[</span>cli-show]<span class="nv">$ </span>mkdir scripts <span class="o">&amp;&amp;</span> touch scripts/console <span class="o">&amp;&amp;</span> chmod a+x scripts/console
+</pre>
+<p>This script will be the entry point for all console commands. We&#39;ll use the default <code>Symfony\Component\Console\Application</code> class provided by Symfony Console. Contents of our script:</p>
+<pre class="highlight php">#!/usr/bin/env php
+<span class="cp">&lt;?php</span>
+<span class="c1">// Define path to application directory
+</span><span class="nb">defined</span><span class="p">(</span><span class="s1">'APPLICATION_PATH'</span><span class="p">)</span>
+    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_PATH'</span><span class="p">,</span> <span class="nb">realpath</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/../application'</span><span class="p">));</span>
+
+<span class="c1">// Define application environment
+</span><span class="nb">defined</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span>
+    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">,</span> <span class="p">(</span><span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">?</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">:</span> <span class="s1">'production'</span><span class="p">));</span>
+
+<span class="c1">// Ensure library/ is on include_path
+</span><span class="nb">set_include_path</span><span class="p">(</span><span class="nb">implode</span><span class="p">(</span><span class="nx">PATH_SEPARATOR</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="nb">realpath</span><span class="p">(</span><span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/../library'</span><span class="p">),</span>
+    <span class="nb">get_include_path</span><span class="p">(),</span>
+<span class="p">)));</span>
+
+<span class="sd">/** Zend_Application */</span>
+<span class="k">require_once</span> <span class="s1">'Zend/Application.php'</span><span class="p">;</span>
+
+<span class="c1">// Create application and bootstrap it
+</span><span class="nv">$application</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Zend_Application</span><span class="p">(</span>
+    <span class="nx">APPLICATION_ENV</span><span class="p">,</span>
+    <span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/configs/application.ini'</span>
+<span class="p">);</span>
+<span class="nv">$application</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
+
+<span class="nv">$cliApp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Application</span><span class="p">(</span>
+    <span class="s1">'Example console application'</span><span class="p">,</span> <span class="s1">'1.0'</span>
+<span class="p">);</span>
+<span class="nv">$cliApp</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre>
+<p>This code is very similar to the code in <code>index.php</code> and we should avoid duplicating it, but for now let&#39;s just try it:</p>
+<pre class="highlight shell"><span class="o">[</span>cli-show]<span class="nv">$ </span>scripts/console
+</pre>
+<p>A nice looking output should appear, telling you possible command-line switches and commands.</p>
+
+<p><img src="/images/cli-show-1.png" alt="Default Symfony console application"></p>
+
+<h2>Introducing Zend application</h2>
+
+<p>Right now CLI script doesn&#39;t know anything about existing Zend application. In order to properly use business-logic of our application, we have into set correct application environment, instantiate instance of Zend_Application and bootstrap it. Also, we should move bootstrapping code to separate file and reuse it between our CLI script, <code>index.php</code> and <code>index-test.php</code> files. Considering all of this, let&#39;s rewrite the script:</p>
+<pre class="highlight php">#!/usr/bin/env php
+<span class="cp">&lt;?php</span>
+<span class="k">require_once</span> <span class="s1">'Zend/Loader/Autoloader.php'</span><span class="p">;</span>
+<span class="nv">$autoloader</span> <span class="o">=</span> <span class="nx">Zend_Loader_Autoloader</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="nv">$autoloader</span><span class="o">-&gt;</span><span class="na">registerNamespace</span><span class="p">(</span><span class="s1">'Symfony'</span><span class="p">);</span>
+<span class="nv">$input</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Input\ArgvInput</span><span class="p">;</span>
+<span class="c1">// Try to get APPLICATION_ENV from environment variable
+</span><span class="nv">$env</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$env</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Get APPLICATION_ENV from command-line option or set to 'development' by default
+</span>    <span class="nv">$env</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">getParameterOption</span><span class="p">(</span><span class="s1">'--env'</span><span class="p">,</span> <span class="s1">'development'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">,</span> <span class="nv">$env</span><span class="p">);</span>
+<span class="nv">$zendApp</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../bootstrapper.php'</span><span class="p">;</span>
+<span class="nv">$cliApp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Application</span><span class="p">(</span>
+    <span class="s1">'Example console application'</span><span class="p">,</span> <span class="s1">'1.0'</span>
+<span class="p">);</span>
+<span class="nv">$cliApp</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre>
+<p>We need to require and configure Zend&#39;s autoloader by hand, because our application isn&#39;t yet bootstrapped at this point. Zend&#39;s library should be in include path, otherwise we must manually add it using <code>set_include_path</code>. We use <code>Symfony\Component\Console\Input\ArgvInput</code> to get application&#39;s environment from command-line. If it&#39;s not passed, &#39;development&#39; environment will be used. Note that we might want to save <code>$zendApp</code> somewhere in order to reference to it in the future. I see 2 options:</p>
+
+<ul>
+<li>put it into <code>Zend_Registry</code></li>
+<li>create a subclass of <code>Symfony\Component\Console\Application</code> which will receive instance of <code>Zend_Application</code> as a constructor argument</li>
+</ul>
+
+<p>As you might see, we&#39;ve moved bootstrapping code into separate <code>bootstrapper.php</code> file under project&#39;s root. It might look like this:</p>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+<span class="c1">// Define path to application directory
+</span><span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_PATH'</span><span class="p">,</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/application'</span><span class="p">);</span>
+
+<span class="c1">// Ensure library/ is on include_path
+</span><span class="nb">set_include_path</span><span class="p">(</span><span class="nb">implode</span><span class="p">(</span><span class="nx">PATH_SEPARATOR</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="nb">realpath</span><span class="p">(</span><span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/../library'</span><span class="p">),</span>
+    <span class="nb">get_include_path</span><span class="p">(),</span>
+<span class="p">)));</span>
+
+<span class="k">require_once</span> <span class="s1">'Zend/Application.php'</span><span class="p">;</span>
+
+<span class="c1">// Create application
+// APPLICATION_ENV should be already defined at this point
+</span><span class="nv">$application</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Zend_Application</span><span class="p">(</span>
+    <span class="nx">APPLICATION_ENV</span><span class="p">,</span>
+    <span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/configs/application.ini'</span>
+<span class="p">);</span>
+<span class="c1">// Bootstrap and return it
+</span><span class="k">return</span> <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
+</pre>
+<p><code>index.php</code> will be using it too:</p>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+<span class="c1">// Define application environment
+</span><span class="nb">defined</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span>
+    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">,</span> <span class="p">(</span><span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">?</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">:</span> <span class="s1">'production'</span><span class="p">));</span>
+<span class="nv">$application</span> <span class="o">=</span> <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../bootstrapper.php'</span><span class="p">;</span>
+<span class="nv">$application</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre>
+<h2>Writing console commands</h2>
+
+<p>Every command is a subclass of <code>Symfony\Component\Console\Command\Command</code>. In order to keep commands organized, we can add a new resource type called &ldquo;command&rdquo; by modifying Bootstrap class:</p>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">Bootstrap</span> <span class="k">extends</span> <span class="nx">Zend_Application_Bootstrap_Bootstrap</span>
+<span class="p">{</span>
+  <span class="c1">// skipping
+</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">_initResourceLoader</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_resourceLoader</span><span class="o">-&gt;</span><span class="na">addResourceType</span><span class="p">(</span><span class="s1">'command'</span><span class="p">,</span> <span class="s1">'commands'</span><span class="p">,</span> <span class="s1">'Command'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+<p>Now we could create <code>application/commands</code> directory and add our commands there. For example, here is the Time command:</p>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">,</span>
+    <span class="nx">Symfony\Component\Console\Input\InputInterface</span><span class="p">,</span>
+    <span class="nx">Symfony\Component\Console\Output\OutputInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Application_Command_Time</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span>
+            <span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'app:time'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">'What time is it?'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setHelp</span><span class="p">(</span><span class="s1">'What time is it? This command answers exactly this question'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$time</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'H:i:s'</span><span class="p">);</span>
+        <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">'Current time: &lt;info&gt;%s&lt;/info&gt;'</span><span class="p">,</span> <span class="nv">$time</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+<p>After creating command, we must add it to the list of known commands by calling <code>addCommands</code>. This is true for all commands (Doctrine ORM, for instance, has many console commands):</p>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+<span class="c1">// ... skipping lines
+</span><span class="nv">$cliApp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Application</span><span class="p">(</span>
+    <span class="s1">'Example console application'</span><span class="p">,</span> <span class="s1">'1.0'</span>
+<span class="p">);</span>
+<span class="nv">$cliApp</span><span class="o">-&gt;</span><span class="na">addCommands</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="c1">// Application commands
+</span>    <span class="k">new</span> <span class="nx">Application_Command_Time</span><span class="p">,</span>
+
+    <span class="c1">// Commands from other libraries
+</span>    <span class="k">new</span> <span class="nx">\Doctrine\ORM\Tools\Console\Command\ClearCache\ResultCommand</span><span class="p">(),</span>
+    <span class="k">new</span> <span class="nx">\Doctrine\ORM\Tools\Console\Command\ClearCache\QueryCommand</span><span class="p">(),</span>
+<span class="p">));</span>
+<span class="nv">$cliApp</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre>
+<p>Let&#39;s see what time is it:</p>
+<pre class="highlight shell"><span class="o">[</span>cli-show]<span class="nv">$ </span>scripts/console app:time
+Current <span class="nb">time</span>: 18:12:02
+</pre>
+<h2>Use it</h2>
+
+<p>Symfony Console is a really great component. It&#39;s decoupled, so you can use it in any kind of application. Even if you aren&#39;t going to write your own commands, you can still use this approach to integrate any library which uses Symfony Console, such as Doctrine ORM. And if you&#39;re on PHP&gt;=5.3 and facing a problem of writing console task, you should definitely use it.</p>
+
+</article>
+
+
+      </div>
+      <div id="root_footer"></div>
+    </div>
+
+    <footer id="footer">
+      <div class="contentContainer">
+        <div>Copyright &copy; 2013 Galymzhan Kozhayev</div>
+        <div>
+          Find me on <a href="https://github.com/galymzhan">Github</a>, 
+          <a href="https://twitter.com/justgalym">Twitter</a>
+          and <a href="http://stackoverflow.com/users/450449/galymzhan">Stack Overflow</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
