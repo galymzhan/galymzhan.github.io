@@ -7,6 +7,5 @@ group :development do
   gem 'rouge'
   gem 'redcarpet'
   gem 'compass'
-  gem 'adsf'
   gem 'foreman'
 end
