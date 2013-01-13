@@ -992,8 +992,8 @@ html, body {
 
 /* line 26, content/assets/screen.sass */
 .contentContainer {
-  max-width: 720px;
-  min-width: 360px;
+  max-width: 740px;
+  min-width: 380px;
   width: 100%;
   margin: 0 auto;
 }
@@ -1002,13 +1002,14 @@ html, body {
 #footer {
   background: #3b3140;
   color: #cccccc;
+  padding: 0 20px;
 }
-/* line 36, content/assets/screen.sass */
+/* line 37, content/assets/screen.sass */
 #footer .contentContainer {
   padding-top: 1.5em;
 }
 
-/* line 40, content/assets/screen.sass */
+/* line 41, content/assets/screen.sass */
 body {
   border-top: 20px solid #3b3140;
   background: url(img/chruch.png) repeat;
@@ -1016,36 +1017,41 @@ body {
   color: #111111;
 }
 
-/* line 46, content/assets/screen.sass */
+/* line 47, content/assets/screen.sass */
+#root {
+  padding: 0 20px;
+}
+
+/* line 50, content/assets/screen.sass */
 header.main {
   margin: 2em 0;
 }
-/* line 48, content/assets/screen.sass */
+/* line 52, content/assets/screen.sass */
 header.main ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 53, content/assets/screen.sass */
+/* line 57, content/assets/screen.sass */
 header.main li {
   display: inline;
   padding: 0.3em 1em;
   border-right: 1px solid #bfb8a3;
 }
-/* line 58, content/assets/screen.sass */
+/* line 62, content/assets/screen.sass */
 header.main li.leader {
   padding-left: 0;
 }
-/* line 61, content/assets/screen.sass */
+/* line 65, content/assets/screen.sass */
 header.main li:last-child {
   border-right: 0;
 }
-/* line 64, content/assets/screen.sass */
+/* line 68, content/assets/screen.sass */
 header.main .author {
   font-weight: bold;
 }
 
-/* line 67, content/assets/screen.sass */
+/* line 71, content/assets/screen.sass */
 a {
   color: #138391;
   text-decoration: none;
@@ -1055,52 +1061,52 @@ a:hover {
   text-decoration: underline;
 }
 
-/* line 72, content/assets/screen.sass */
+/* line 76, content/assets/screen.sass */
 h1 a, h2 a, h3 a {
   color: #111111;
 }
 
-/* line 75, content/assets/screen.sass */
+/* line 79, content/assets/screen.sass */
 h1, h2, h3, h4 {
   font-weight: bold;
 }
 
-/* line 78, content/assets/screen.sass */
+/* line 82, content/assets/screen.sass */
 h1 {
   font-size: 2.22222em;
   line-height: 1.35em;
 }
 
-/* line 81, content/assets/screen.sass */
+/* line 85, content/assets/screen.sass */
 h2 {
   font-size: 1.77778em;
   line-height: 1.6875em;
 }
 
-/* line 84, content/assets/screen.sass */
+/* line 88, content/assets/screen.sass */
 h3 {
   font-size: 1.44444em;
   line-height: 0.83077em;
 }
 
-/* line 87, content/assets/screen.sass */
+/* line 91, content/assets/screen.sass */
 h4 {
   font-size: 1.11111em;
   line-height: 1.08em;
 }
 
-/* line 90, content/assets/screen.sass */
+/* line 94, content/assets/screen.sass */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* line 95, content/assets/screen.sass */
+/* line 99, content/assets/screen.sass */
 article {
   margin-bottom: 3em;
 }
 
-/* line 98, content/assets/screen.sass */
+/* line 102, content/assets/screen.sass */
 time {
   font-family: Verdana, "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", "Verdana Ref", sans-serif;
   color: #666666;
@@ -1108,12 +1114,12 @@ time {
   line-height: 1.6875em;
 }
 
-/* line 103, content/assets/screen.sass */
+/* line 107, content/assets/screen.sass */
 article > header > h1 {
   margin: 0;
 }
 
-/* line 106, content/assets/screen.sass */
+/* line 110, content/assets/screen.sass */
 code, pre {
   font-size: 0.77778em;
   line-height: 1.73571em;
@@ -1124,18 +1130,18 @@ code, pre {
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", monospace;
 }
 
-/* line 114, content/assets/screen.sass */
+/* line 118, content/assets/screen.sass */
 pre {
   padding: 8px;
   white-space: pre;
 }
 
-/* line 118, content/assets/screen.sass */
+/* line 122, content/assets/screen.sass */
 code {
   padding: 2px 4px;
 }
 
-/* line 121, content/assets/screen.sass */
+/* line 125, content/assets/screen.sass */
 blockquote {
   margin: 1em 0;
   padding: 0 40px;
