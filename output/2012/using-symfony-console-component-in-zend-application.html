@@ -67,31 +67,31 @@ autoloaderNamespaces.symfony = &quot;Symfony&quot;
 <pre class="highlight php">#!/usr/bin/env php
 <span class="cp">&lt;?php</span>
 <span class="c1">// Define path to application directory
-</span><span class="nb">defined</span><span class="p">(</span><span class="s1">'APPLICATION_PATH'</span><span class="p">)</span>
-    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_PATH'</span><span class="p">,</span> <span class="nb">realpath</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/../application'</span><span class="p">));</span>
+</span><span class="nb">defined</span><span class="p">(</span><span class="s1">&#39;APPLICATION_PATH&#39;</span><span class="p">)</span>
+    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">&#39;APPLICATION_PATH&#39;</span><span class="p">,</span> <span class="nb">realpath</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/../application&#39;</span><span class="p">));</span>
 
 <span class="c1">// Define application environment
-</span><span class="nb">defined</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span>
-    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">,</span> <span class="p">(</span><span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">?</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">:</span> <span class="s1">'production'</span><span class="p">));</span>
+</span><span class="nb">defined</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">)</span>
+    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="s1">&#39;production&#39;</span><span class="p">));</span>
 
 <span class="c1">// Ensure library/ is on include_path
 </span><span class="nb">set_include_path</span><span class="p">(</span><span class="nb">implode</span><span class="p">(</span><span class="nx">PATH_SEPARATOR</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="nb">realpath</span><span class="p">(</span><span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/../library'</span><span class="p">),</span>
+    <span class="nb">realpath</span><span class="p">(</span><span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">&#39;/../library&#39;</span><span class="p">),</span>
     <span class="nb">get_include_path</span><span class="p">(),</span>
 <span class="p">)));</span>
 
 <span class="sd">/** Zend_Application */</span>
-<span class="k">require_once</span> <span class="s1">'Zend/Application.php'</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="s1">&#39;Zend/Application.php&#39;</span><span class="p">;</span>
 
 <span class="c1">// Create application and bootstrap it
 </span><span class="nv">$application</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Zend_Application</span><span class="p">(</span>
     <span class="nx">APPLICATION_ENV</span><span class="p">,</span>
-    <span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/configs/application.ini'</span>
+    <span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">&#39;/configs/application.ini&#39;</span>
 <span class="p">);</span>
 <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
 
 <span class="nv">$cliApp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Application</span><span class="p">(</span>
-    <span class="s1">'Example console application'</span><span class="p">,</span> <span class="s1">'1.0'</span>
+    <span class="s1">&#39;Example console application&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span>
 <span class="p">);</span>
 <span class="nv">$cliApp</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre>
@@ -107,20 +107,20 @@ autoloaderNamespaces.symfony = &quot;Symfony&quot;
 <p>Right now CLI script doesn&#39;t know anything about existing Zend application. In order to properly use business-logic of our application, we have into set correct application environment, instantiate instance of Zend_Application and bootstrap it. Also, we should move bootstrapping code to separate file and reuse it between our CLI script, <code>index.php</code> and <code>index-test.php</code> files. Considering all of this, let&#39;s rewrite the script:</p>
 <pre class="highlight php">#!/usr/bin/env php
 <span class="cp">&lt;?php</span>
-<span class="k">require_once</span> <span class="s1">'Zend/Loader/Autoloader.php'</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="s1">&#39;Zend/Loader/Autoloader.php&#39;</span><span class="p">;</span>
 <span class="nv">$autoloader</span> <span class="o">=</span> <span class="nx">Zend_Loader_Autoloader</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
-<span class="nv">$autoloader</span><span class="o">-&gt;</span><span class="na">registerNamespace</span><span class="p">(</span><span class="s1">'Symfony'</span><span class="p">);</span>
+<span class="nv">$autoloader</span><span class="o">-&gt;</span><span class="na">registerNamespace</span><span class="p">(</span><span class="s1">&#39;Symfony&#39;</span><span class="p">);</span>
 <span class="nv">$input</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Input\ArgvInput</span><span class="p">;</span>
 <span class="c1">// Try to get APPLICATION_ENV from environment variable
-</span><span class="nv">$env</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">);</span>
+</span><span class="nv">$env</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">);</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$env</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Get APPLICATION_ENV from command-line option or set to 'development' by default
-</span>    <span class="nv">$env</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">getParameterOption</span><span class="p">(</span><span class="s1">'--env'</span><span class="p">,</span> <span class="s1">'development'</span><span class="p">);</span>
+    <span class="c1">// Get APPLICATION_ENV from command-line option or set to &#39;development&#39; by default
+</span>    <span class="nv">$env</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">getParameterOption</span><span class="p">(</span><span class="s1">&#39;--env&#39;</span><span class="p">,</span> <span class="s1">&#39;development&#39;</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">,</span> <span class="nv">$env</span><span class="p">);</span>
-<span class="nv">$zendApp</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../bootstrapper.php'</span><span class="p">;</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">,</span> <span class="nv">$env</span><span class="p">);</span>
+<span class="nv">$zendApp</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../bootstrapper.php&#39;</span><span class="p">;</span>
 <span class="nv">$cliApp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Application</span><span class="p">(</span>
-    <span class="s1">'Example console application'</span><span class="p">,</span> <span class="s1">'1.0'</span>
+    <span class="s1">&#39;Example console application&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span>
 <span class="p">);</span>
 <span class="nv">$cliApp</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre>
@@ -134,21 +134,21 @@ autoloaderNamespaces.symfony = &quot;Symfony&quot;
 <p>As you might see, we&#39;ve moved bootstrapping code into separate <code>bootstrapper.php</code> file under project&#39;s root. It might look like this:</p>
 <pre class="highlight php"><span class="cp">&lt;?php</span>
 <span class="c1">// Define path to application directory
-</span><span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_PATH'</span><span class="p">,</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/application'</span><span class="p">);</span>
+</span><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;APPLICATION_PATH&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/application&#39;</span><span class="p">);</span>
 
 <span class="c1">// Ensure library/ is on include_path
 </span><span class="nb">set_include_path</span><span class="p">(</span><span class="nb">implode</span><span class="p">(</span><span class="nx">PATH_SEPARATOR</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="nb">realpath</span><span class="p">(</span><span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/../library'</span><span class="p">),</span>
+    <span class="nb">realpath</span><span class="p">(</span><span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">&#39;/../library&#39;</span><span class="p">),</span>
     <span class="nb">get_include_path</span><span class="p">(),</span>
 <span class="p">)));</span>
 
-<span class="k">require_once</span> <span class="s1">'Zend/Application.php'</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="s1">&#39;Zend/Application.php&#39;</span><span class="p">;</span>
 
 <span class="c1">// Create application
 // APPLICATION_ENV should be already defined at this point
 </span><span class="nv">$application</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Zend_Application</span><span class="p">(</span>
     <span class="nx">APPLICATION_ENV</span><span class="p">,</span>
-    <span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">'/configs/application.ini'</span>
+    <span class="nx">APPLICATION_PATH</span> <span class="o">.</span> <span class="s1">&#39;/configs/application.ini&#39;</span>
 <span class="p">);</span>
 <span class="c1">// Bootstrap and return it
 </span><span class="k">return</span> <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
@@ -156,9 +156,9 @@ autoloaderNamespaces.symfony = &quot;Symfony&quot;
 <p><code>index.php</code> will be using it too:</p>
 <pre class="highlight php"><span class="cp">&lt;?php</span>
 <span class="c1">// Define application environment
-</span><span class="nb">defined</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span>
-    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">,</span> <span class="p">(</span><span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">?</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">'APPLICATION_ENV'</span><span class="p">)</span> <span class="o">:</span> <span class="s1">'production'</span><span class="p">));</span>
-<span class="nv">$application</span> <span class="o">=</span> <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../bootstrapper.php'</span><span class="p">;</span>
+</span><span class="nb">defined</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">)</span>
+    <span class="o">||</span> <span class="nb">define</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;APPLICATION_ENV&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="s1">&#39;production&#39;</span><span class="p">));</span>
+<span class="nv">$application</span> <span class="o">=</span> <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../bootstrapper.php&#39;</span><span class="p">;</span>
 <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre>
 <h2>Writing console commands</h2>
@@ -172,7 +172,7 @@ autoloaderNamespaces.symfony = &quot;Symfony&quot;
 </span>
     <span class="k">protected</span> <span class="k">function</span> <span class="nf">_initResourceLoader</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_resourceLoader</span><span class="o">-&gt;</span><span class="na">addResourceType</span><span class="p">(</span><span class="s1">'command'</span><span class="p">,</span> <span class="s1">'commands'</span><span class="p">,</span> <span class="s1">'Command'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_resourceLoader</span><span class="o">-&gt;</span><span class="na">addResourceType</span><span class="p">(</span><span class="s1">&#39;command&#39;</span><span class="p">,</span> <span class="s1">&#39;commands&#39;</span><span class="p">,</span> <span class="s1">&#39;Command&#39;</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre>
@@ -187,15 +187,15 @@ autoloaderNamespaces.symfony = &quot;Symfony&quot;
     <span class="k">protected</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="nv">$this</span>
-            <span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'app:time'</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">'What time is it?'</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">setHelp</span><span class="p">(</span><span class="s1">'What time is it? This command answers exactly this question'</span><span class="p">);</span>
+            <span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;app:time&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;What time is it?&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setHelp</span><span class="p">(</span><span class="s1">&#39;What time is it? This command answers exactly this question&#39;</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="nv">$time</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'H:i:s'</span><span class="p">);</span>
-        <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">'Current time: &lt;info&gt;%s&lt;/info&gt;'</span><span class="p">,</span> <span class="nv">$time</span><span class="p">);</span>
+        <span class="nv">$time</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;H:i:s&#39;</span><span class="p">);</span>
+        <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;Current time: &lt;info&gt;%s&lt;/info&gt;&#39;</span><span class="p">,</span> <span class="nv">$time</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre>
@@ -203,7 +203,7 @@ autoloaderNamespaces.symfony = &quot;Symfony&quot;
 <pre class="highlight php"><span class="cp">&lt;?php</span>
 <span class="c1">// ... skipping lines
 </span><span class="nv">$cliApp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Component\Console\Application</span><span class="p">(</span>
-    <span class="s1">'Example console application'</span><span class="p">,</span> <span class="s1">'1.0'</span>
+    <span class="s1">&#39;Example console application&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span>
 <span class="p">);</span>
 <span class="nv">$cliApp</span><span class="o">-&gt;</span><span class="na">addCommands</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="c1">// Application commands

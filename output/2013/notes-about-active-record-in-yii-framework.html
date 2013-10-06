@@ -86,13 +86,13 @@ why it matters.</p>
   <span class="c1">// Scopes inside Post model
 </span>  <span class="k">public</span> <span class="k">function</span> <span class="nf">scopes</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
-      <span class="s1">'published'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s1">'published = 1'</span>
+      <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;published = 1&#39;</span>
       <span class="p">),</span>
-      <span class="s1">'popular'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s1">'published = 1'</span><span class="p">,</span>
-        <span class="s1">'order'</span> <span class="o">=&gt;</span> <span class="s1">'view_count DESC'</span><span class="p">,</span>
-        <span class="s1">'limit'</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s1">&#39;popular&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;published = 1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view_count DESC&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
       <span class="p">),</span>
     <span class="p">);</span>
   <span class="p">}</span>
@@ -105,8 +105,8 @@ why it matters.</p>
 </span>  <span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Show only published posts
 </span>    <span class="nv">$dataProvider</span><span class="o">=</span><span class="k">new</span> <span class="nx">CActiveDataProvider</span><span class="p">(</span><span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">published</span><span class="p">());</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
-      <span class="s1">'dataProvider'</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;dataProvider&#39;</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
     <span class="p">));</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -115,9 +115,9 @@ why it matters.</p>
 </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Posts</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
 
 <span class="o">&lt;?</span><span class="nx">php</span>
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="s1">'zii.widgets.CListView'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-  <span class="s1">'dataProvider'</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
-  <span class="s1">'itemView'</span><span class="o">=&gt;</span><span class="s1">'_view'</span><span class="p">,</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="s1">&#39;zii.widgets.CListView&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;dataProvider&#39;</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
+  <span class="s1">&#39;itemView&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;_view&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 <span class="cp">?&gt;</span>
 </pre>
@@ -129,9 +129,9 @@ named scope <code>popular</code> for that. Our controller and view will be chang
 </span>  <span class="k">public</span> <span class="k">function</span> <span class="nf">actionIndex</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$dataProvider</span><span class="o">=</span><span class="k">new</span> <span class="nx">CActiveDataProvider</span><span class="p">(</span><span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">published</span><span class="p">());</span>
     <span class="nv">$popular</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">popular</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span> <span class="c1">// &lt;-- this
-</span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
-      <span class="s1">'dataProvider'</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
-      <span class="s1">'popular'</span> <span class="o">=&gt;</span> <span class="nv">$popular</span><span class="p">,</span>
+</span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;dataProvider&#39;</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
+      <span class="s1">&#39;popular&#39;</span> <span class="o">=&gt;</span> <span class="nv">$popular</span><span class="p">,</span>
     <span class="p">));</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -146,9 +146,9 @@ named scope <code>popular</code> for that. Our controller and view will be chang
 
 <span class="nt">&lt;h1&gt;</span>Posts<span class="nt">&lt;/h1&gt;</span>
 <span class="cp">&lt;?php</span>
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="s1">'zii.widgets.CListView'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-  <span class="s1">'dataProvider'</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
-  <span class="s1">'itemView'</span><span class="o">=&gt;</span><span class="s1">'_view'</span><span class="p">,</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="s1">&#39;zii.widgets.CListView&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;dataProvider&#39;</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
+  <span class="s1">&#39;itemView&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;_view&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 <span class="cp">?&gt;</span>
 </pre>
@@ -215,7 +215,7 @@ same time, using relational data to filter primary models. Scenario:</p>
 <pre class="highlight php"><span class="k">class</span> <span class="nc">Post</span> <span class="p">{</span>
   <span class="k">public</span> <span class="k">function</span> <span class="nf">relations</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
-      <span class="s1">'tags'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">MANY_MANY</span><span class="p">,</span> <span class="s1">'Tag'</span><span class="p">,</span> <span class="s1">'post_tag(post_id, tag_id)'</span><span class="p">),</span>
+      <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">MANY_MANY</span><span class="p">,</span> <span class="s1">&#39;Tag&#39;</span><span class="p">,</span> <span class="s1">&#39;post_tag(post_id, tag_id)&#39;</span><span class="p">),</span>
     <span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -225,17 +225,17 @@ same time, using relational data to filter primary models. Scenario:</p>
 <p>In the post listing we show tags as links:</p>
 <pre class="highlight php"><span class="o">&lt;</span><span class="nx">b</span><span class="o">&gt;</span><span class="nx">Tagged</span><span class="o">:&lt;/</span><span class="nx">b</span><span class="o">&gt;</span>
 <span class="o">&lt;?</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$post</span><span class="o">-&gt;</span><span class="na">tags</span> <span class="k">as</span> <span class="nv">$tag</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span>
-<span class="cp">&lt;?=</span> <span class="nx">CHtml</span><span class="o">::</span><span class="na">link</span><span class="p">(</span><span class="nx">CHtml</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$tag</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">'post/index'</span><span class="p">,</span> <span class="s1">'tag'</span> <span class="o">=&gt;</span> <span class="nv">$tag</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">))</span> <span class="cp">?&gt;</span>,
+<span class="cp">&lt;?=</span> <span class="nx">CHtml</span><span class="o">::</span><span class="na">link</span><span class="p">(</span><span class="nx">CHtml</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$tag</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;post/index&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="nv">$tag</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">))</span> <span class="cp">?&gt;</span>,
 <span class="cp">&lt;?</span> <span class="k">endforeach</span> <span class="cp">?&gt;</span>
 </pre>
 <p>Now we should output posts for given tag when <code>/post/index?tag=tagname</code> is
 requested. No problem, we already have a relation for that:</p>
-<pre class="highlight php"><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'tag'</span><span class="p">]))</span> <span class="p">{</span>
+<pre class="highlight php"><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]))</span> <span class="p">{</span>
   <span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">published</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'with'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-      <span class="s1">'tags'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s1">'tags.name = :tagName'</span><span class="p">,</span>
-        <span class="s1">'params'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">':tagName'</span> <span class="o">=&gt;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'tag'</span><span class="p">]),</span>
+    <span class="s1">&#39;with&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tags.name = :tagName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;params&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;:tagName&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]),</span>
       <span class="p">),</span>
     <span class="p">),</span>
   <span class="p">));</span>
@@ -249,28 +249,28 @@ behavior, as we&#39;re explicitly restricting related tags to only those with
 specified name. To get all related tags we can introduce an additional join to
 filter posts:</p>
 <pre class="highlight php"><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">published</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'with'</span> <span class="o">=&gt;</span> <span class="s1">'tags'</span><span class="p">,</span> <span class="c1">// or 'with' =&gt; array('tags' =&gt; array('together' =&gt; false)),
+  <span class="s1">&#39;with&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="c1">// or &#39;with&#39; =&gt; array(&#39;tags&#39; =&gt; array(&#39;together&#39; =&gt; false)),
 </span>                    <span class="c1">// to load tags in a separate query
 </span>
   <span class="c1">// Introducing manual join
-</span>  <span class="s1">'join'</span> <span class="o">=&gt;</span> <span class="s1">'
+</span>  <span class="s1">&#39;join&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;
     INNER JOIN post_tag pt ON pt.post_id = t.id
     INNER JOIN tag ON pt.tag_id = tag.id
-  '</span><span class="p">,</span>
+  &#39;</span><span class="p">,</span>
   <span class="c1">// and specify criteria for the join
-</span>  <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s1">'tag.name = :tagName'</span><span class="p">,</span>
-  <span class="s1">'params'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">':tagName'</span> <span class="o">=&gt;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'tag'</span><span class="p">]),</span>
+</span>  <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tag.name = :tagName&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;params&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;:tagName&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]),</span>
 <span class="p">));</span>
 </pre>
 <p>Note that if you don&#39;t want to load related models, there is no need in an
 additional join, just use the <code>select</code> option:</p>
-<pre class="highlight php"><span class="c1">// We don't need to load tags
+<pre class="highlight php"><span class="c1">// We don&#39;t need to load tags
 </span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">published</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'with'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'tags'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-      <span class="s1">'select'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s1">'tags.name = :tagName'</span><span class="p">,</span>
-      <span class="s1">'params'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">':tagName'</span> <span class="o">=&gt;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'tag'</span><span class="p">]),</span>
+  <span class="s1">&#39;with&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;select&#39;</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tags.name = :tagName&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;params&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;:tagName&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]),</span>
     <span class="p">),</span>
   <span class="p">),</span>
 <span class="p">));</span>
@@ -291,15 +291,15 @@ be used, so we must ensure there isn&#39;t anything hardcoded.</p>
 <h3>Quote table, alias and column names</h3>
 <pre class="highlight php"><span class="c1">// Bad
 </span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbCriteria</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s1">'t.likes &gt; 10'</span><span class="p">,</span>
+  <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;t.likes &gt; 10&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 
 <span class="c1">// Good
 </span><span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbConnection</span><span class="p">();</span>
 <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getTableAlias</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> <span class="c1">// Pass true to quote
-</span><span class="nv">$column</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">quoteColumnName</span><span class="p">(</span><span class="s1">'likes'</span><span class="p">);</span>
+</span><span class="nv">$column</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">quoteColumnName</span><span class="p">(</span><span class="s1">&#39;likes&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbCriteria</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="si">{</span><span class="nv">$alias</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nv">$column</span><span class="si">}</span><span class="s2"> &gt; 10&quot;</span><span class="p">,</span>
+  <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="si">{</span><span class="nv">$alias</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nv">$column</span><span class="si">}</span><span class="s2"> &gt; 10&quot;</span><span class="p">,</span>
 <span class="p">));</span>
 </pre>
 <h3>Table alias</h3>
@@ -307,14 +307,14 @@ be used, so we must ensure there isn&#39;t anything hardcoded.</p>
 <p>As noted in the documentation, table alias may vary in relational queries, so
 we don&#39;t know it in advance. The good example is already shown above.</p>
 <pre class="highlight php"><span class="c1">// Bad, does not use alias at all
-</span><span class="nv">$column</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">quoteColumnName</span><span class="p">(</span><span class="s1">'likes'</span><span class="p">);</span>
+</span><span class="nv">$column</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">quoteColumnName</span><span class="p">(</span><span class="s1">&#39;likes&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbCriteria</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="si">{</span><span class="nv">$column</span><span class="si">}</span><span class="s2"> &gt; 10&quot;</span><span class="p">,</span>
+  <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="si">{</span><span class="nv">$column</span><span class="si">}</span><span class="s2"> &gt; 10&quot;</span><span class="p">,</span>
 <span class="p">));</span>
 
 <span class="c1">// Bad, hardcoded alias
 </span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbCriteria</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s2">&quot;t.</span><span class="si">{</span><span class="nv">$column</span><span class="si">}</span><span class="s2"> &gt; 10&quot;</span><span class="p">,</span>
+  <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;t.</span><span class="si">{</span><span class="nv">$column</span><span class="si">}</span><span class="s2"> &gt; 10&quot;</span><span class="p">,</span>
 <span class="p">));</span>
 </pre>
 <h3>Table names</h3>
@@ -323,14 +323,14 @@ we don&#39;t know it in advance. The good example is already shown above.</p>
 &ldquo;tableName&rdquo;.</p>
 <pre class="highlight php"><span class="c1">// Bad
 </span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbCriteria</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'join'</span> <span class="o">=&gt;</span> <span class="s1">'user'</span><span class="p">,</span>
+  <span class="s1">&#39;join&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 
 <span class="c1">// Good
 </span><span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbConnection</span><span class="p">();</span>
 <span class="nv">$table</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">quoteTableName</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">tableName</span><span class="p">());</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDbCriteria</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'join'</span> <span class="o">=&gt;</span> <span class="nv">$table</span><span class="p">,</span>
+  <span class="s1">&#39;join&#39;</span> <span class="o">=&gt;</span> <span class="nv">$table</span><span class="p">,</span>
 <span class="p">));</span>
 </pre>
 <h3>Use unique names for binding parameters</h3>
@@ -340,16 +340,16 @@ provides static <code>$paramCount</code> property, which is used internally by f
 itself to generate unique parameter names.</p>
 <pre class="highlight php"><span class="c1">// Bad, this fails if there is another binding called :param
 </span><span class="nv">$criteria</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s2">&quot;t.id &gt; :param&quot;</span><span class="p">,</span>
-  <span class="s1">'params'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">':param'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">),</span>
+  <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;t.id &gt; :param&quot;</span><span class="p">,</span>
+  <span class="s1">&#39;params&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;:param&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">),</span>
 <span class="p">));</span>
 
 <span class="c1">// Good
 // By default it generates names like :ycp1
 </span><span class="nv">$paramName</span> <span class="o">=</span> <span class="nx">CDbCriteria</span><span class="o">::</span><span class="na">PARAM_PREFIX</span> <span class="o">.</span> <span class="nx">CDbCriteria</span><span class="o">::</span><span class="nv">$paramCount</span><span class="o">++</span><span class="p">;</span>
 <span class="nv">$criteria</span><span class="o">-&gt;</span><span class="na">mergeWith</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-  <span class="s1">'condition'</span> <span class="o">=&gt;</span> <span class="s2">&quot;t.id &gt; </span><span class="si">{</span><span class="nv">$paramName</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s1">'params'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nv">$paramName</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">),</span>
+  <span class="s1">&#39;condition&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;t.id &gt; </span><span class="si">{</span><span class="nv">$paramName</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+  <span class="s1">&#39;params&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nv">$paramName</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">),</span>
 <span class="p">));</span>
 </pre>
 <h3>Merge default scopes of parent classes</h3>
