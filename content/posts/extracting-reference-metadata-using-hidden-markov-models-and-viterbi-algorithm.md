@@ -3,7 +3,7 @@ title: Extracting reference metadata using hidden Markov models and Viterbi algo
 created_at: 2013-10-06 17:37:29
 kind: article
 meta_description: Extracting reference metadata using hidden Markov models and Viterbi algorithm
-description: This is the first I have applied machine-learning algorithm to turn messy data into machine-readable data.
+description: This is the first time I have applied machine-learning algorithm to turn messy data into machine-readable data.
 ---
 
 Recently, a friend of mine contacted me asking help to accomplish an unusual
