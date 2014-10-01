@@ -10,8 +10,7 @@ languages, algorithms & data structures and ways to deal with software
 complexity.
 
 This is my personal website where I'll share things I found to be useful and/or
-interesting.  English isn't my native language, if you find some stupid
-mistake(s), please let me know :)
+interesting.
 
 You can contact me via email: <span id="contactAddr">`Please, enable JS to see it`</span>. Also, I have accounts on
 [Github](https://github.com/galymzhan) and [Stack
