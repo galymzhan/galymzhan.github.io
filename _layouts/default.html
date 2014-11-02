@@ -1,43 +1,34 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><%= html_escape(@item[:title]) %> - bytespree.com</title>
-    <% if item.attributes.include?(:meta_description) %>
-    <meta name="description" content="<%= html_escape(item[:meta_description]) %>">
-    <% elsif item.attributes.include?(:description) %>
-    <meta name="description" content="<%= html_escape(item[:description]) %>">
-    <% end %>
+    <title>{{ page.title }} - bytespree.com</title>
+    {% if page.meta_description %}
+    <meta name="description" content="{{ page.meta_description }}">
+    {% elsif page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% endif %}
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="nanoc <%= Nanoc::VERSION %>"> 
 
     <link rel="stylesheet" href="/assets/screen.css">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <script>window.html5 || document.write('<script src="/assets/js/html5shiv.js"><\/script>')</script>
-    <![endif]-->
   </head>
   <body>
-    <div id="root">
-      <div class="contentContainer">
-        <header class="main">
-          <ul>
-            <li class="leader">
-              <a href="/">Posts</a>
-            </li>
-            <li><a href="/about.html">About</a></li>
-          </ul>
-        </header>
-        <%= yield %>
-      </div>
-      <div id="root_footer"></div>
+    <div class="contentContainer">
+      <header class="main">
+        <ul>
+          <li>
+            <a href="/">Posts</a>
+          </li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </header>
+      {{ content }}
     </div>
 
     <footer id="footer">
       <div class="contentContainer">
-        <div>Copyright &copy; <%= Time.now.year %> Galymzhan Kozhayev</div>
+        <div>Copyright &copy; Galymzhan Kozhayev</div>
         <div>
           Find me on <a href="https://github.com/galymzhan">Github</a>, 
           <a href="https://twitter.com/justgalym">Twitter</a>

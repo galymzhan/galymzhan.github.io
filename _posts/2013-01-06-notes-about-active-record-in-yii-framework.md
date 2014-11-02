@@ -1,7 +1,7 @@
 ---
 title: Notes about Active Record in Yii framework
-created_at: 2013-01-06 13:06:55
-kind: article
+date: 2013-01-06 13:06:55
+layout: post
 description: Some useful and good to know things I learned about Active Record in Yii.
 ---
 
@@ -49,7 +49,7 @@ So here comes the not so obvious part -- this inner criteria is shared by ALL
 finder instances of `Post`. Let's have a look at this example to understand
 why it matters.
 
-```php?start_inline
+{% highlight php startinline %}
 // Model: models/Post.php
 class Post extends CActiveRecord {
   // Scopes inside Post model
@@ -89,13 +89,13 @@ $this->widget('zii.widgets.CListView', array(
   'itemView'=>'_view',
 ));
 ?>
-```
+{% endhighlight %}
 
 So far everything is great. When we go to `/post/index` we see all published
 blog posts. Now suppose we also want to show latest popular posts. Let's use
 named scope `popular` for that. Our controller and view will be changed a bit.
 
-```php?start_inline
+{% highlight php startinline %}
 class PostController extends CController {
   // Show off posts
   public function actionIndex() {
@@ -123,7 +123,7 @@ $this->widget('zii.widgets.CListView', array(
   'itemView'=>'_view',
 ));
 ?>
-```
+{% endhighlight %}
 
 Now when we go the posts page, we suddenly see ALL posts under **"Posts"**
 header, both published and not published. Seems like
@@ -139,15 +139,15 @@ too late, criteria is already clean, so the CActiveDataProvider fetches all
 posts. To overcome this, we can either get popular posts before creating data
 provider:
 
-```php?start_inline
+{% highlight php startinline %}
 $popular = Post::model()->popular()->findAll();
 $dataProvider=new CActiveDataProvider(Post::model()->published());
-```
+{% endhighlight %}
 
 or in case of some complicated scenario we can save and restore the inner
 criteria:
 
-```php?start_inline
+{% highlight php startinline %}
 $dataProvider=new CActiveDataProvider(Post::model()->published());
 // Save criteria
 $oldCriteria = Post::model()->getDbCriteria();
@@ -155,13 +155,13 @@ $oldCriteria = Post::model()->getDbCriteria();
 $popular = Post::model()->popular()->findAll();
 // Restore criteria
 Post::model()->setDbCriteria($oldCriteria);
-```
+{% endhighlight %}
 
 I took me some time to figure out what's happening when I first discovered it,
 so you'd better keep it in mind.  Now let's take a peek inside CActiveRecord
 to understand why criteria it shared:
 
-```php?start_inline
+{% highlight php startinline %}
 public static function model($className=__CLASS__)
 {
   if(isset(self::$_models[$className]))
@@ -174,7 +174,7 @@ public static function model($className=__CLASS__)
     return $model;
   }
 }
-```
+{% endhighlight %}
 
 Wow, actually the whole static model is cached in a static variable `$_models`
 to make things faster, so that means we get the same instance when we call
@@ -193,7 +193,7 @@ same time, using relational data to filter primary models. Scenario:
 
 To illustrate it, let's add tags to posts:
 
-```php?start_inline
+{% highlight php startinline %}
 class Post {
   public function relations() {
     return array(
@@ -201,23 +201,23 @@ class Post {
     );
   }
 }
-```
+{% endhighlight %}
 
 Note that we use additional table `post_tag` to store `MANY_MANY` relations.
 
 In the post listing we show tags as links:
 
-```php?start_inline
+{% highlight php startinline %}
 <b>Tagged:</b>
 <? foreach ($post->tags as $tag): ?>
 <?= CHtml::link(CHtml::encode($tag->name), array('post/index', 'tag' => $tag->name)) ?>,
 <? endforeach ?>
-```
+{% endhighlight %}
 
 Now we should output posts for given tag when `/post/index?tag=tagname` is
 requested. No problem, we already have a relation for that:
 
-```php?start_inline
+{% highlight php startinline %}
 if (isset($_GET['tag'])) {
   $posts = Post::model()->published()->findAll(array(
     'with' => array(
@@ -228,7 +228,7 @@ if (isset($_GET['tag'])) {
     ),
   ));
 }
-```
+{% endhighlight %}
 
 This code correctly finds tagged posts, but has another problem -- only the
 requested tag is shown in a list of tags for all found posts. For example, if
@@ -238,7 +238,7 @@ behavior, as we're explicitly restricting related tags to only those with
 specified name. To get all related tags we can introduce an additional join to
 filter posts:
 
-```php?start_inline
+{% highlight php startinline %}
 $posts = Post::model()->published()->findAll(array(
   'with' => 'tags', // or 'with' => array('tags' => array('together' => false)),
                     // to load tags in a separate query
@@ -252,12 +252,12 @@ $posts = Post::model()->published()->findAll(array(
   'condition' => 'tag.name = :tagName',
   'params' => array(':tagName' => $_GET['tag']),
 ));
-```
+{% endhighlight %}
 
 Note that if you don't want to load related models, there is no need in an
 additional join, just use the `select` option:
 
-```php?start_inline
+{% highlight php startinline %}
 // We don't need to load tags
 $posts = Post::model()->published()->findAll(array(
   'with' => array(
@@ -268,7 +268,7 @@ $posts = Post::model()->published()->findAll(array(
     ),
   ),
 ));
-```
+{% endhighlight %}
 
 ## Using scopes safely
 
@@ -285,7 +285,7 @@ be used, so we must ensure there isn't anything hardcoded.
 
 ### Quote table, alias and column names
 
-```php?start_inline
+{% highlight php startinline %}
 // Bad
 $this->getDbCriteria()->mergeWith(array(
   'condition' => 't.likes > 10',
@@ -298,14 +298,14 @@ $column = $db->quoteColumnName('likes');
 $this->getDbCriteria()->mergeWith(array(
   'condition' => "{$alias}.{$column} > 10",
 ));
-```
+{% endhighlight %}
 
 ### Table alias
 
 As noted in the documentation, table alias may vary in relational queries, so
 we don't know it in advance. The good example is already shown above.
 
-```php?start_inline
+{% highlight php startinline %}
 // Bad, does not use alias at all
 $column = $db->quoteColumnName('likes');
 $this->getDbCriteria()->mergeWith(array(
@@ -316,14 +316,14 @@ $this->getDbCriteria()->mergeWith(array(
 $this->getDbCriteria()->mergeWith(array(
   'condition' => "t.{$column} > 10",
 ));
-```
+{% endhighlight %}
 
 ### Table names
 
 If you'll ever need to know name of a table, all AR models define method
 "tableName".
 
-```php?start_inline
+{% highlight php startinline %}
 // Bad
 $this->getDbCriteria()->mergeWith(array(
   'join' => 'user',
@@ -335,7 +335,7 @@ $table = $db->quoteTableName(User::model()->tableName());
 $this->getDbCriteria()->mergeWith(array(
   'join' => $table,
 ));
-```
+{% endhighlight %}
 
 ### Use unique names for binding parameters
 
@@ -343,7 +343,7 @@ We could have invented our own solution for this, but CDbCriteria already
 provides static `$paramCount` property, which is used internally by framework
 itself to generate unique parameter names.
 
-```php?start_inline
+{% highlight php startinline %}
 // Bad, this fails if there is another binding called :param
 $criteria->mergeWith(array(
   'condition' => "t.id > :param",
@@ -357,7 +357,7 @@ $criteria->mergeWith(array(
   'condition' => "t.id > {$paramName}",
   'params' => array($paramName => 2),
 ));
-```
+{% endhighlight %}
 
 ### Merge default scopes of parent classes
 
@@ -365,7 +365,7 @@ If both child and parent AR classes have defined defaultScope, do not try to
 merge them with something like `array_merge`, use `CDbCriteria::mergeWith`
 instead:
 
-```php?start_inline
+{% highlight php startinline %}
 public function defaultScope() {
   $criteria = new CDbCriteria(array(
     // Specify your default scope here
@@ -373,7 +373,7 @@ public function defaultScope() {
   $criteria->mergeWith(parent::defaultScope());
   return $criteria;
 }
-```
+{% endhighlight %}
 
 # Also ...
 

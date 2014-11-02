@@ -1,7 +1,7 @@
 ---
 title: Extracting reference metadata using hidden Markov models and Viterbi algorithm
-created_at: 2013-10-06 17:37:29
-kind: article
+date: 2013-10-06 17:37:29
+layout: post
 meta_description: Extracting reference metadata using hidden Markov models and Viterbi algorithm
 description: This is the first time I have applied machine-learning algorithm to turn messy data into machine-readable data.
 ---
@@ -11,22 +11,18 @@ task -- extract all references contained in PDF files and convert them into
 machine-friendly format. PDFs in question were all kinds of academic papers and
 publications. Typical reference looked like this:
 
-```
-Rakishev B.R. Open Cast Mining in Kazakhstan Under Market Conditions.
-//The 21st World Mining Congress & Expo 2008. New Challenges and Visions for
-Mining. Cracow, Poland, 2008. P.283-289
-```
+    Rakishev B.R. Open Cast Mining in Kazakhstan Under Market Conditions.
+    //The 21st World Mining Congress & Expo 2008. New Challenges and Visions for
+    Mining. Cracow, Poland, 2008. P.283-289
 
 we needed to get all of reference's fields:
 
-```
-"authors": "Rakishev B.R.",
-"title": "Open Cast Mining in Kazakhstan Under Market Conditions.",
-"journal": "//The 21st World Mining Congress & Expo 2008. New Challenges and Visions for Mining.",
-"location": "Cracow, Poland",
-"year": "2008",
-"pages": "P.283-289"
-```
+    "authors": "Rakishev B.R.",
+    "title": "Open Cast Mining in Kazakhstan Under Market Conditions.",
+    "journal": "//The 21st World Mining Congress & Expo 2008. New Challenges and Visions for Mining.",
+    "location": "Cracow, Poland",
+    "year": "2008",
+    "pages": "P.283-289"
 
 Since references have different ways of formatting, we need more than a bunch
 of "if"s and mighty regexp tricks to accomplish it. This is where machine
@@ -87,7 +83,7 @@ reference field can be mapped to two states. So, in order to come up with a set
 of states we must first decide which reference fields we'd want to capture.
 Here are the fields I used: author, title, date, pages, volume, journal,
 number, url, publisher, location.  We could have treated each of this fields as
-a separate state, but as noted in [1], using multiple states per field leads to
+a separate state, but as noted in \[1\], using multiple states per field leads to
 better results, so I decided to use 2 states per field: a "start" state and an
 "rest" state. Say, for author field, we'd have 2 states: "author start" and
 "author rest".
@@ -118,7 +114,7 @@ of journal or magazine. So these strings are good examples of separate symbols.
 After doing some research of available references, I compiled the following
 set of symbols and their corresponding regular expressions:
 
-```php?start_inline
+{% highlight php startinline %}
 protected $symbolRegexps = array(
   'comma' => ',',
   'dot' => '\.',
@@ -151,7 +147,7 @@ protected $symbolRegexps = array(
   'digit' => '\d+',
   'word' => '\p{L}+',
 );
-```
+{% endhighlight %}
 
 Choosing a correct set of symbols is said to be crucial for algorithm's quality
 and performance, so experimenting with and tweaking it might be a good idea.
@@ -268,10 +264,10 @@ I have uploaded the source code of extractor (it's PHP btw) to github:
 
 ## References
 
-* [1]: Seymore, Kristie and Rosenfield, Roni, "Learning Hidden Markov Model
+1. Seymore, Kristie and Rosenfield, Roni, "Learning Hidden Markov Model
   Structure for Information Extraction" (1999). Computer
 Science Department. Paper 1325. http://repository.cmu.edu/compsci/1325
 
-* [2]: Ping Yin , Ming Zhang , Zhihong Deng , Dongqing Yang "Metadata
+2. Ping Yin , Ming Zhang , Zhihong Deng , Dongqing Yang "Metadata
   Extraction from Bibliographies Using Bigram HMM". ICADL 2004, LNCS 3334, pp.
 310–319, 2004.

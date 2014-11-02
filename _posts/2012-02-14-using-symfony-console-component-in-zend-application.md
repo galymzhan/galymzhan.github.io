@@ -1,7 +1,7 @@
 ---
 title: Using Symfony Console Component in Zend application
-created_at: 2012-02-14 21:53
-kind: article
+date: 2012-02-14 21:53
+layout: post
 description: Instead of reinventing the wheel, have a look at Symfony Console Component for all of your CLI tasks.
 ---
 
@@ -17,31 +17,27 @@ Let's see how could we integrate it into Zend application. Suppose we have a Zen
 
 I'm going to install it from Git. In real project, we'll probably use git's submodule functionality or download the archive from Github and unzip it, but for the sake of simplicity, let's just clone it now.
 
-```bash
-[/]$ cd ~/cli-show
-[cli-show]$ mkdir -p library/Symfony/Component
-[cli-show]$ git clone https://github.com/symfony/Console.git library/Symfony/Component/Console
-```
+    [/]$ cd ~/cli-show
+    [cli-show]$ mkdir -p library/Symfony/Component
+    [cli-show]$ git clone https://github.com/symfony/Console.git library/Symfony/Component/Console
 
 Also, to properly autoload Symfony classes we'll have to register Symfony namespace (assuming `Zend_Loader_Autoloader` is used for autoloading).
 
-```ini
+{% highlight ini %}
 [production]
 ; Add this line
 autoloaderNamespaces.symfony = "Symfony"
-```
+{% endhighlight %}
 
 ## Testing installation
 
 Symfony Console itself has some basic commands. Let's try running them. Create the file `console` under `scripts` directory, and make it executable.
 
-```bash
-[cli-show]$ mkdir scripts && touch scripts/console && chmod a+x scripts/console
-```
+    [cli-show]$ mkdir scripts && touch scripts/console && chmod a+x scripts/console
 
 This script will be the entry point for all console commands. We'll use the default `Symfony\Component\Console\Application` class provided by Symfony Console. Contents of our script:
 
-```php
+{% highlight php %}
 #!/usr/bin/env php
 <?php
 // Define path to application directory
@@ -72,13 +68,11 @@ $cliApp = new \Symfony\Component\Console\Application(
     'Example console application', '1.0'
 );
 $cliApp->run();
-```
+{% endhighlight %}
 
 This code is very similar to the code in `index.php` and we should avoid duplicating it, but for now let's just try it:
 
-```bash
-[cli-show]$ scripts/console
-```
+    [cli-show]$ scripts/console
 
 A nice looking output should appear, telling you possible command-line switches and commands.
 
@@ -88,7 +82,7 @@ A nice looking output should appear, telling you possible command-line switches 
 
 Right now CLI script doesn't know anything about existing Zend application. In order to properly use business-logic of our application, we have into set correct application environment, instantiate instance of Zend_Application and bootstrap it. Also, we should move bootstrapping code to separate file and reuse it between our CLI script, `index.php` and `index-test.php` files. Considering all of this, let's rewrite the script:
 
-```php
+{% highlight php %}
 #!/usr/bin/env php
 <?php
 require_once 'Zend/Loader/Autoloader.php';
@@ -107,7 +101,7 @@ $cliApp = new \Symfony\Component\Console\Application(
     'Example console application', '1.0'
 );
 $cliApp->run();
-```
+{% endhighlight %}
 
 We need to require and configure Zend's autoloader by hand, because our application isn't yet bootstrapped at this point. Zend's library should be in include path, otherwise we must manually add it using `set_include_path`. We use `Symfony\Component\Console\Input\ArgvInput` to get application's environment from command-line. If it's not passed, 'development' environment will be used. Note that we might want to save `$zendApp` somewhere in order to reference to it in the future. I see 2 options:
 
@@ -116,7 +110,7 @@ We need to require and configure Zend's autoloader by hand, because our applicat
 
 As you might see, we've moved bootstrapping code into separate `bootstrapper.php` file under project's root. It might look like this:
 
-```php
+{% highlight php %}
 <?php
 // Define path to application directory
 define('APPLICATION_PATH', __DIR__ . '/application');
@@ -137,24 +131,24 @@ $application = new Zend_Application(
 );
 // Bootstrap and return it
 return $application->bootstrap();
-```
+{% endhighlight %}
 
 `index.php` will be using it too:
 
-```php
+{% highlight php %}
 <?php
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 $application = require __DIR__ . '/../bootstrapper.php';
 $application->run();
-```
+{% endhighlight %}
 
 ## Writing console commands
 
 Every command is a subclass of `Symfony\Component\Console\Command\Command`. In order to keep commands organized, we can add a new resource type called "command" by modifying Bootstrap class:
 
-```php
+{% highlight php %}
 <?php
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
@@ -166,11 +160,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_resourceLoader->addResourceType('command', 'commands', 'Command');
     }
 }
-```
+{% endhighlight %}
 
 Now we could create `application/commands` directory and add our commands there. For example, here is the Time command:
 
-```php
+{% highlight php %}
 <?php
 use Symfony\Component\Console\Command\Command,
     Symfony\Component\Console\Input\InputInterface,
@@ -192,11 +186,11 @@ class Application_Command_Time extends Command
         $output->writeln('Current time: <info>%s</info>', $time);
     }
 }
-```
+{% endhighlight %}
 
 After creating command, we must add it to the list of known commands by calling `addCommands`. This is true for all commands (Doctrine ORM, for instance, has many console commands):
 
-```php
+{% highlight php %}
 <?php
 // ... skipping lines
 $cliApp = new \Symfony\Component\Console\Application(
@@ -211,14 +205,12 @@ $cliApp->addCommands(array(
     new \Doctrine\ORM\Tools\Console\Command\ClearCache\QueryCommand(),
 ));
 $cliApp->run();
-```
+{% endhighlight %}
 
 Let's see what time is it:
 
-```bash
-[cli-show]$ scripts/console app:time
-Current time: 18:12:02
-```
+    [cli-show]$ scripts/console app:time
+    Current time: 18:12:02
 
 ## Use it
 

@@ -1,7 +1,7 @@
 ---
 title: "Zend Framework: Extracting strings from PHP and Twig sources"
-created_at: 2012-02-05 15:04
-kind: article
+date: 2012-02-05 15:04
+layout: post
 description: How to implement custom mechanism of extracting translatable strings from your source code, since there is no standard way.
 ---
 
@@ -10,7 +10,7 @@ In the last project I worked on, we used `Zend_Translate` with array adapter. Th
 - We were unable to use [Poedit](http://www.poedit.net/), because we didn't use Gettext adapter
 - All of our forms use default translator, so form definitions looks like this:
 
-```php
+{% highlight php startinline %}
 <?php
 class Application_Forms_Register extends Zend_Form
 {
@@ -29,19 +29,21 @@ class Application_Forms_Register extends Zend_Form
     $this->submit->setLabel('Register'); // And this
   }
 }
-```
+{% endhighlight %}
 
 - Twig is used for templating, so we needed to extract translations from .twig files as well:
 
-```jinja
+{% highlight jinja %}
+{% raw %}
 {{ t('Fill in the following form') }}
-```
+{% endraw %}
+{% endhighlight %}
 
 Note that we wrote custom extension for Twig, which provides `t` function for translation. Essentially, it just delegates calls to `Zend_Translate`.
 
 Considering this, I decided to write a custom extractor. Since we have 2 main sources of translatable strings (Twig templates and PHP files), let's define common interface:
 
-```php
+{% highlight php %}
 <?php
 
 /**
@@ -62,11 +64,11 @@ interface ExtractorInterface
      */
     public function setWarningListener(\Closure $listener);
 }
-```
+{% endhighlight %}
 
 We'll call `extract` for given resource and it should return all translatable strings from it. `setWarningListener` allows setting custom callback which will be fired whenever something wrong happens during extracting. Let's start from Twig implementation:
 
-```php
+{% highlight php %}
 <?php
 
 /**
@@ -179,7 +181,7 @@ class TwigExtractor extends AbstractExtractor implements ExtractorInterface, \Tw
         return 0;
     }
 }
-```
+{% endhighlight %}
 
 Twig allows you to write and register your custom node visitors. This is what we have done in the constructor. As you might know, after parsing template file, Twig creates a structure called "abstract syntax tree" - hierarchical tree of nodes. Each node represents something in template's source code: assignment, arithmetical expression or possibly an include statement. After parsing, Twig traverses this abstract tree of nodes, calling magic method for each of its registered visitors and passing current node as an argument. This method is defined by `Twig_NodeVisitorInterface` as `enterNode`. Among other types of nodes, there is a node called "function expression", which is a target of our interest. If we encounter such node, we'll see whether its name equal to `t` (which is the translator function), and in such case, extract its arguments. There is one more thing: in case of plural translations `t` receives array of strings, not just one string. So there is an additional logic covering that case too.
 
@@ -187,17 +189,17 @@ Twig allows you to write and register your custom node visitors. This is what we
 
 Now let's examine what we could do with PHP files. As there were a wrapper class around `Zend_Translate`, all of our translate calls looked like this:
 
-```php
+{% highlight php %}
 <?php
 use Application\Translate\Translate as t;
 // ...
 $title = t::t('Incoming messages');
 $message = t::t(array('You have %d message', 'You have %d messages'), $c);
-```
+{% endhighlight %}
 
 Also, we needed to extract strings in forms `setLabel(something)` and `'label' => something`. Having armed with this information, I wrote a parser. Parser is a finite-state machine that receives a stream of PHP tokens. Here it is:
 
-```php
+{% highlight php %}
 <?php
 /**
  * Extracts messages from PHP source files
@@ -495,11 +497,11 @@ class PhpExtractor extends AbstractExtractor implements ExtractorInterface
         }
     }
 }
-```
+{% endhighlight %}
 
 As you can see, we used [`token_get_all`](http://php.net/token_get_all) to get stream of tokens from given file. Because we're skipping whitespaces where possible, this parser could handle these cases:
 
-```php
+{% highlight php %}
 <?php
 t :: t('abc');
 t
@@ -510,12 +512,12 @@ array('label' => "something");
 => "something",
 $f->
 setLabel("something")
-```
+{% endhighlight %}
 and so on.
 
 Example usage:
 
-```php
+{% highlight php %}
 <?php
 $listener = function($resource, $message, $lineno) {
   echo sprintf('Warning in %s at line %d: %s', $resource, $lineno, $message);
@@ -530,6 +532,6 @@ foreach (new \RecursiveIteratorIterator($dirIter) as $filename => $fileinfo) {
     }
 }
 print_r($result);
-```
+{% endhighlight %}
 
 This is not the end, because you'll need to merge extracted messages into existing translations, delete outdated translations but that's another story.

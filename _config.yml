@@ -1,0 +1,10 @@
+# Site settings
+url: "http://bytespree.com" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+
+permalink: /:year/:title.html
+
+sass:
+  style: :compressed
