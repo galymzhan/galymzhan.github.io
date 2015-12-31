@@ -1,130 +1,55 @@
 ---
 ---
 
-@import "normalize"
 @import "pygments"
 
-// Variables
-
-$footerHeight: 80px
-
-$mainDarkColor: #3b3140
-$linkNormalColor: #de4d1f
-$textColor: #222
-$secondaryTextColor: #666
-
-$defaultFontStack: Georgia, "Lucida Bright", "Bitstream Charter", "URW Bookman L", serif
-
-// Code
+// styles inspired by http://bettermotherfuckingwebsite.com/ 
+// and http://motherfuckingwebsite.com/
 
 html
-  position: relative
-  min-height: 100%
-  font-size: 18 / 16 * 100%
-  line-height: 1.5
-  font-family: $defaultFontStack
+  font-family: sans-serif
 
 body
-  border-top: 20px solid $mainDarkColor
-  background: url(img/chruch.png)
-  color: $textColor
-  margin: 0 0 $footerHeight
-
-  > .contentContainer
-    padding-bottom: 3rem
-
-.contentContainer
-  max-width: 760px
-  width: 100%
-  margin: 0 auto
-  box-sizing: border-box
-  padding-left: 20px
-  padding-right: 20px
-
-#footer
-  background: $mainDarkColor
-  color: #ccc
-  position: absolute
-  left: 0
-  bottom: 0
-  height: $footerHeight
-  width: 100%
-  transform-style: preserve-3d
-
-  .contentContainer
-    position: relative
-    top: 50%
-    -webkit-transform: translateY(-50%)
-    -ms-transform: translateY(-50%)
-    transform: translateY(-50%)
-
-header.main
-  margin: 2rem 0
-
-  ul
-    list-style: none
-    margin: 0
-    padding: 0
-
-  li
-    display: inline
-    padding: .3em 1em
-    border-right: 1px solid #bfb8a3
-
-    &:first-child
-      padding-left: 0
-
-    &:last-child
-      border-right: 0
-
-  .author
-    font-weight: bold
-
-a
-  color: $linkNormalColor
-  text-decoration: none
-  &:hover, &:focus
-    text-decoration: underline
+  margin: 20px auto
+  max-width: 700px
+  line-height: 1.6
+  font-size: 16px
+  color: #444
+  padding: 0 10px
+  position: relative
 
 h1, h2, h3
-  a
-    color: $textColor
+  line-height: 1.2
 
-p, ul, ol, blockquote, table, h1, h2, h3, h4, h5, h6
-  margin-top: 1rem
-  margin-bottom: 1rem
+article
+  margin-bottom: 1em
 
-h1
-  font-size: 2rem
-h2
-  font-size: 1.5rem
-h3
-  font-size: 1.17rem
-h4
-  font-size: 1rem
-h5
-  font-size: .83rem
+time
+  display: block
+
+pre
+  font-size: 12px
+  padding: 8px
+  overflow: auto
+
+code
+  font-size: 12px
+
+figure
+  margin: 0
 
 img
   max-width: 100%
-  height: auto
 
-code, pre
-  overflow-x: auto
-  overflow-y: visible
+.sidebar ul
+  list-style: none
+  padding: 0
+  margin: 0 0 1em
 
-pre
-  padding: 8px
-  font-size: .8rem
-
-code, kbd, pre, samp
-  font-family: Consolas, "Liberation Mono", "Ubuntu Mono", Menlo, Courier, monospace
-
-blockquote
-  padding: 0 10px
-  font-style: italic
-  border-left: 4px solid #bbb
-
-time
-  font-size: .8rem
-  color: $secondaryTextColor
+@media (min-width: 880px)
+  .sidebar
+    position: absolute
+    width: 120px
+    top: 0
+    left: -160px
+    text-align: right

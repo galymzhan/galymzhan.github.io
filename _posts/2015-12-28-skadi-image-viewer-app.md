@@ -1,6 +1,6 @@
 ---
 title: skadi - image viewer app
-date: 2015-12-28 15:41:46
+date: 2015-12-28 15:41
 layout: post
 ---
 

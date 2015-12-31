@@ -1,6 +1,6 @@
 ---
 title: Notes about Active Record in Yii framework
-date: 2013-01-06 13:06:55
+date: 2013-01-06 13:06
 layout: post
 description: Some useful and good to know things I learned about Active Record in Yii.
 ---

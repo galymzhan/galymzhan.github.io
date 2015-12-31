@@ -1,6 +1,6 @@
 ---
 title: Simple countdown timer script for Mac OS X
-date: 2014-11-05 14:40:30
+date: 2014-11-05 14:40
 layout: post
 ---
 
