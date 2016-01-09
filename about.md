@@ -17,7 +17,7 @@ interesting.
 Contacts:
 
 - Email: <span id="contactAddr">`Please, enable Javascript to see it`</span>
-- [Github](https://github.com/galymzhan)
+- [Github](https://github.com/redcapital)
 - [Stack Overflow](http://stackoverflow.com/users/450449/galymzhan)
 - [Twitter](https://twitter.com/justgalym)
 
