@@ -13,4 +13,4 @@ Anyway, I've been working on a lightweight image viewer app for OS X lately. I h
 
 The builtin OS X viewer is kinda good, but doesn't fulfill the second bullet point. So I quickly hacked the minimal usable prototype in about two hours and later added some essential functionality like zooming and dragging. Using Qt5 along with QML made the development easy as pie.
 
-If you too think that existing viewers are bloated and shitty you're welcome to try it out - [installation instructions](https://github.com/galymzhan/skadi)
+If you too think that existing viewers are bloated and shitty you're welcome to try it out - [installation instructions](https://github.com/redcapital/skadi)

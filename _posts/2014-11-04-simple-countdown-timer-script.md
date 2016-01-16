@@ -31,4 +31,4 @@ This command starts a timer with the interval of 1 hour and 30 minutes and shows
 - first, when 95% of time has elapsed, for the input above it will pop up when 4.5 minutes is remaining
 - when time is up
 
-Grab the sources [here](https://gist.github.com/galymzhan/b8203ba7ed399a74af76).
+Grab the sources [here](https://gist.github.com/redcapital/b8203ba7ed399a74af76).

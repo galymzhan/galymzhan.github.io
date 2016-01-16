@@ -14,6 +14,9 @@ complexity.
 This is my personal website where I'll share things I found to be useful and/or
 interesting.
 
+The apparent simplicity of the website's design doesn't mean I don't know how to write CSS ;)
+Rather, it's inspired by ideas expressed [here](http://motherfuckingwebsite.com/) and [here](http://bettermotherfuckingwebsite.com/).
+
 Contacts:
 
 - Email: <span id="contactAddr">`Please, enable Javascript to see it`</span>

@@ -260,7 +260,7 @@ heard of or used machine-learning algorithms I encourage you to read about and
 maybe even try some, they are very useful :)
 
 I have uploaded the source code of extractor (it's PHP btw) to github:
-[https://github.com/galymzhan/reference-parser](https://github.com/galymzhan/reference-parser)
+[https://github.com/redcapital/reference-parser](https://github.com/redcapital/reference-parser)
 
 ## References
 
